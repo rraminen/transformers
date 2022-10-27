@@ -189,6 +189,8 @@ class TrainingArguments:
             Ratio of total training steps used for a linear warmup from 0 to `learning_rate`.
         warmup_steps (`int`, *optional*, defaults to 0):
             Number of steps used for a linear warmup from 0 to `learning_rate`. Overrides any effect of `warmup_ratio`.
+        stable_perf_warmup_steps (`int`, *optional*, defaults to 10):
+            Used to calculate the `stable_train_samples_per_second` values.
         log_level (`str`, *optional*, defaults to `passive`):
             Logger log level to use on the main process. Possible choices are the log levels as strings: 'debug',
             'info', 'warning', 'error' and 'critical', plus a 'passive' level which doesn't set anything and lets the
@@ -570,7 +572,8 @@ class TrainingArguments:
     warmup_ratio: float = field(
         default=0.0, metadata={"help": "Linear warmup over warmup_ratio fraction of total steps."}
     )
-    warmup_steps: int = field(default=10, metadata={"help": "Linear warmup over warmup_steps."})
+    warmup_steps: int = field(default=0, metadata={"help": "Linear warmup over warmup_steps."})
+    stable_perf_warmup_steps: int = field(default=10, metadata={"help": "Number of warm up steps required for stable perf."})
 
     log_level: Optional[str] = field(
         default="passive",
